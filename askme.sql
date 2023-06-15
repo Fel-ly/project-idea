@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 03:53 PM
+-- Generation Time: Jun 16, 2023 at 01:28 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,64 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `destination`
+-- Table structure for table `destinations`
 --
 
-CREATE TABLE `destination` (
-  `destination_id` varchar(6) NOT NULL,
-  `destination_name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `routes`
---
-
-CREATE TABLE `routes` (
-  `route_id` varchar(6) NOT NULL,
-  `route_no` varchar(4) NOT NULL,
-  `origin_station_id` varchar(6) NOT NULL,
-  `destination_station_id` varchar(6) NOT NULL,
-  `mode_id` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `route_stops`
---
-
-CREATE TABLE `route_stops` (
-  `route_stop_name` varchar(20) NOT NULL,
-  `route_id` varchar(6) NOT NULL,
-  `station_id` varchar(6) NOT NULL,
-  `stop_order` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stations`
---
-
-CREATE TABLE `stations` (
-  `station_id` varchar(6) NOT NULL,
-  `station_name` varchar(20) NOT NULL,
-  `station_address` varchar(50) NOT NULL,
-  `latitude` double(8,6) NOT NULL,
-  `longitude` double(9,6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transport_modes`
---
-
-CREATE TABLE `transport_modes` (
-  `mode_id` varchar(5) NOT NULL,
-  `mode_name` varchar(12) NOT NULL
+CREATE TABLE `destinations` (
+  `id` int(3) NOT NULL,
+  `destination` varchar(20) NOT NULL,
+  `stage` varchar(20) NOT NULL,
+  `transport` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -89,58 +39,20 @@ CREATE TABLE `transport_modes` (
 --
 
 --
--- Indexes for table `destination`
+-- Indexes for table `destinations`
 --
-ALTER TABLE `destination`
-  ADD PRIMARY KEY (`destination_id`);
+ALTER TABLE `destinations`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `routes`
---
-ALTER TABLE `routes`
-  ADD PRIMARY KEY (`route_id`),
-  ADD KEY `origin_station_id` (`origin_station_id`),
-  ADD KEY `destination_station_id` (`destination_station_id`),
-  ADD KEY `mode_id` (`mode_id`);
-
---
--- Indexes for table `route_stops`
---
-ALTER TABLE `route_stops`
-  ADD PRIMARY KEY (`route_stop_name`),
-  ADD KEY `route_id` (`route_id`),
-  ADD KEY `station_id` (`station_id`);
-
---
--- Indexes for table `stations`
---
-ALTER TABLE `stations`
-  ADD PRIMARY KEY (`station_id`);
-
---
--- Indexes for table `transport_modes`
---
-ALTER TABLE `transport_modes`
-  ADD PRIMARY KEY (`mode_id`);
-
---
--- Constraints for dumped tables
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Constraints for table `routes`
+-- AUTO_INCREMENT for table `destinations`
 --
-ALTER TABLE `routes`
-  ADD CONSTRAINT `routes_ibfk_1` FOREIGN KEY (`origin_station_id`) REFERENCES `routes` (`route_id`),
-  ADD CONSTRAINT `routes_ibfk_2` FOREIGN KEY (`destination_station_id`) REFERENCES `routes` (`route_id`),
-  ADD CONSTRAINT `routes_ibfk_3` FOREIGN KEY (`mode_id`) REFERENCES `routes` (`route_id`);
-
---
--- Constraints for table `route_stops`
---
-ALTER TABLE `route_stops`
-  ADD CONSTRAINT `route_stops_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `route_stops` (`route_stop_name`),
-  ADD CONSTRAINT `route_stops_ibfk_2` FOREIGN KEY (`station_id`) REFERENCES `route_stops` (`route_stop_name`);
+ALTER TABLE `destinations`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
