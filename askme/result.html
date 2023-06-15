@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: 'result.php',
+                type: 'GET',
+                success: function(message) {
+                    $('#result-message').html(message);
+                },
+                error: function() {
+                    $('#result-message').html('Error retrieving the message.');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Results</h1>
+
+    <div id="result-message"></div>
+
+    <!-- Add other content or styling as needed -->
+
+</body>
+</html>
