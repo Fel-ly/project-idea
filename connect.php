@@ -4,7 +4,8 @@
     <title>Directions</title>
 </head>
 <body>
-    <h1>Directions</h1>
+    <h1>Directions</h1><br><br>
+     <marquee behaviour="scroll"><b>Welcome to ASKME</b></marquee>
 
     <?php
     // Establish a database connection
